@@ -1,32 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "jeux.h"
 
-int main() {
-    char joueur, ordinateur;
-    int resultat;
-
-    srand(time(NULL)); // Initialisation du générateur de nombres aléatoires
-
-    printf("Roche (R), Papier (P), Ciseaux (C) ? ");
-    scanf(" %c", &joueur);
-
-    if (joueur != 'R' && joueur != 'P' && joueur != 'C') {
-        printf("Choix invalide. Veuillez choisir R, P ou C.\n");
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Utilisation: %s [R/P/C]\n", argv[0]);
         return 1;
     }
 
-    ordinateur = hasard();
-    printf("L'ordinateur a choisi: %c\n", ordinateur);
+    char joueur = argv[1][0];
+    if (joueur != 'R' && joueur != 'P' && joueur != 'C') {
+        printf("Choix invalide. Utilisez R, P ou C.\n");
+        return 1;
+    }
 
-    resultat = comparaison(joueur, ordinateur);
+    char ordinateur = hasard();
+
+    printf("Joueur: %c\n", joueur);
+    printf("Ordinateur: %c\n", ordinateur);
+
+    int resultat = comparaison(joueur, ordinateur);
 
     if (resultat == 0) {
-        printf("Égalité !\n");
+        printf("Match nul !\n");
     } else if (resultat == 1) {
-        printf("Vous avez gagné !\n");
+        printf("Le joueur gagne !\n");
     } else {
-        printf("L'ordinateur a gagné !\n");
+        printf("L'ordinateur gagne !\n");
     }
 
     return 0;
 }
+

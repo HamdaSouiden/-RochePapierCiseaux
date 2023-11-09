@@ -3,7 +3,7 @@
 #include "jeux.h"
 
 char hasard() {
-    char choix[] = {'R', 'P', 'C'};
+    char choix[3] = {'R', 'P', 'C'};
     int index = rand() % 3;
     return choix[index];
 }
